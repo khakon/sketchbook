@@ -14,16 +14,17 @@ function permutations(array){
     }
     return result;
 }
+function concat(array){
+    return array.reduce(function (acc, x) { return acc.concat(x); }, []);
+}
 
 function permutations(array){
 
     if (array.length === 0) {
         return [[]];
     }
-    return array.map(function (x, i)  {
-        console.log(x); 
-        var rest = array.filter(function (_, index) { return index !== i; });
-        console.log(rest); 
-        return [[x].concat(permutations(rest))]; 
-    });
+    return concat(array.map(function (x, i) {
+        var rest = array.slice(0, i).concat(array.slice(i + 1));
+        return permutations(rest).map(function (p) { return [x].concat(p); });
+    }));
 }
