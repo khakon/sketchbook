@@ -1,4 +1,13 @@
-#lang scheme
+#lang racket
+(require racket/trace)
+
+(define (pairs n)
+  (accumulate append
+              '()
+              (map (lambda (i)
+                     (map (lambda (j) (list i j))
+                          (enumerate-interval 1 (- i 1))))
+                   (enumerate-interval 1 n))))
 
 (define (fib n)
   (fib-iter 1 0 n))
@@ -19,7 +28,7 @@
 (define (fold-left1 op initial sequence)
   (if (null? sequence)
       initial
-       (fold-left1 op (op initial (car sequence)) (cdr sequence))))
+      (fold-left1 op (op initial (car sequence)) (cdr sequence))))
 
 (define (accumulate op initial sequence)
   (if (null? sequence)
@@ -66,5 +75,6 @@
 (fold-left / 1 (list 1 2 3))
 
 (fold-left1 / 1 (list 1 2 3))
+
 
 (newline)

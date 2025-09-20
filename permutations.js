@@ -14,6 +14,7 @@ function permutations(array){
     }
     return result;
 }
+
 function concat(array){
     return array.reduce(function (acc, x) { return acc.concat(x); }, []);
 }
@@ -28,3 +29,15 @@ function permutations(array){
         return permutations(rest).map(function (p) { return [x].concat(p); });
     }));
 }
+
+var perm = (function(list){
+
+    if(list.length == 0){
+        return [];
+    }
+
+    return list.map((x, i) => {
+        perm(list.slice(0, i)).map(y => )
+    })
+
+})(['a','b','c'])
